@@ -54,5 +54,12 @@
 					"kids_pets": {"mean": 60, "stdev": 50},
 					"personal_care": {"mean": 35, "stdev": 50},
 					"travel": {"mean": 60, "stdev": 600}
-				}
+				},
+  	"shopping_time": {
+					"AM": 60,
+					"PM": 70
+					 },
+	"travel_pct": 35,
+  	"travel_max_dist" : 850
+
 }

@@ -1,0 +1,13 @@
+*.iml
+.idea/inspectionProfiles/profiles_settings.xml
+*.xml
+.idea/inspectionProfiles/profiles_settings.xml
+*.xml
+.idea/.name
+*.xml
+.idea/inspectionProfiles/Project_Default.xml
+*.xml
+*.pyc
+data/customers.csv
+*.xml
+*.pyc

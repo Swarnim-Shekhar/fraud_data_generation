@@ -1,13 +1,17 @@
+from __future__ import division
 import random
 import pandas as pd
 from pandas import *
 import json
-import numpy as pd
+import numpy as np
 import sys
 import datetime
 from datetime import timedelta
 from datetime import date
 import math
+from random import sample
+from faker import Faker
+
 
 import profile_weights
 
@@ -17,7 +21,7 @@ def get_user_input():
         for char in ['/', '-', '_', ' ']:
             if char in d:
                 d = d.split(char)
-                try:    
+                try:
                     return date(int(d[2]), int(d[0]), int(d[1]))
                 except:
                     error_msg(3)
@@ -40,19 +44,27 @@ def get_user_input():
 
     try:
         customers = open(sys.argv[1], 'r').readlines()
+        #customers = open('data/customers.csv', 'r').readlines()
     except:
-        error_msg(1)   
+        error_msg(1)
     try:
-        pro = open(sys.argv[2], 'r').read()
-        pro_name = sys.argv[2].split('/')[-1]
+        m = str(sys.argv[2])
+        #m = 'C:/Users/Brandon/git/data_generation/profiles/millenials.json'
+        pro = open(m, 'r').read()
+        #fix for windows file paths
+        pro_name = m.split('profiles')[-1]
+        pro_name = pro_name[1:]
+
     except:
-        error_msg(2)    
+        error_msg(2)
     try:
         startd = convert_date(sys.argv[3])
+        #startd = convert_date('01-01-2015')
     except:
-        error_msg(3)        
+        error_msg(3)
     try:
         endd = convert_date(sys.argv[4])
+        #endd = convert_date('08-25-2015')
     except:
         error_msg(4)
 
@@ -61,7 +73,7 @@ def get_user_input():
 def create_header(line):
     headers = line.split('|')
     headers[-1] = headers[-1].replace('\n','')
-    headers.extend(['trans_num', 'trans_date', 'category', 'amt'])
+    headers.extend(['trans_num', 'trans_date', 'trans_time', 'category', 'amt', 'merchant', 'merch_lat', 'merch_long'])
     print ''.join([h + '|' for h in headers])[:-1]
     return headers
 
@@ -70,10 +82,38 @@ class Customer:
     def __init__(self, customer, profile):
         self.customer = customer
         self.attrs = self.clean_line(self.customer)
-    
+
     def print_trans(self, trans):
-        for t in trans:
-            print self.customer + '|' + t
+        is_traveling = trans[1]
+        travel_max = trans[2]
+
+        for t in trans[0]:
+
+            ## Get transaction location details to generate appropriate merchant record
+            cust_state = cust.attrs['state']
+            groups = t.split('|')
+            trans_cat = groups[3]
+            merch_filtered = merch[merch['category'] == trans_cat]
+            random_row = merch_filtered.ix[random.sample(merch_filtered.index, 1)]
+            chosen_merchant = random_row.iloc[0]['merchant_name']
+
+            cust_lat = cust.attrs['lat']
+            cust_long = cust.attrs['long']
+
+            if is_traveling:
+                # hacky math.. assuming ~70 miles per 1 decimal degree of lat/long
+                # sorry for being American, you're on your own for kilometers.
+                rad = (float(travel_max) / 100) * 1.43
+
+                #geo_coordinate() uses uniform distribution with lower = (center-rad), upper = (center+rad)
+                merch_lat = fake.geo_coordinate(center=float(cust_lat),radius=rad)
+                merch_long = fake.geo_coordinate(center=float(cust_long),radius=rad)
+            else:
+                # otherwise not traveling, so use 1 decimial degree (~70mile) radius around home address
+                rad = 1
+                merch_lat = fake.geo_coordinate(center=float(cust_lat),radius=rad)
+                merch_long = fake.geo_coordinate(center=float(cust_long),radius=rad)
+            print self.customer.replace('\n','') + '|' + t + '|' + str(chosen_merchant) + '|' + str(merch_lat) + '|' + str(merch_long)
 
     def clean_line(self, line):
         # separate into a list of attrs
@@ -93,6 +133,12 @@ if __name__ == '__main__':
     # takes the customers headers and appends
     # transaction headers and returns/prints
     headers = create_header(customers[0])
+
+    # generate Faker object to calc merchant transaction locations
+    fake = Faker()
+
+    # read merchant.csv used for transaction record
+    merch = pd.read_csv('demographic_data/merchants.csv' , sep='|')
 
     # for each customer, if the customer fits this profile
     # generate appropriate number of transactions

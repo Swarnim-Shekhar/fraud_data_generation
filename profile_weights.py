@@ -6,6 +6,7 @@ from datetime import date
 from datetime import timedelta
 import random
 import numpy as np
+from faker import Faker
 
 class Profile:
     def __init__(self, pro, start, end):
@@ -156,6 +157,7 @@ class Profile:
         # convert weights to proportions and use 
         # the cumsum as the key from which to sample
         self.weight_to_cumsum('categories_wt')
+        self.weight_to_cumsum('shopping_time') ###BRANDON
         self.date_weights()
 
     def closest_rand(self, pro, num):
@@ -168,23 +170,51 @@ class Profile:
                 self.profile['categories_amt'][category]['mean']
         while True:
             amt = np.random.gamma(shape, scale, 1)[0]
-            if amt > 0:
-                return "{:.2f}".format(amt)
+
+            #seeing lots of <$1.00 charges, hacky fix even though it breaks the gamma distribution
+            if amt < 1:
+                amt = np.random.uniform(1.00, 10.00)
+                return str("{:.2f}".format(amt))
+            if amt >= 1:
+                return str("{:.2f}".format(amt))
+
+    def sample_time(self,am_or_pm):
+            if am_or_pm == 'AM':
+                hour = random.randrange(1, 11, 1)
+            if am_or_pm == 'PM':
+                hour = random.randrange(12, 23, 1)
+
+            mins = random.randrange(60)
+            secs = random.randrange(60)
+            time_stamp = str(hour) + ":" + str(mins) + ":" + str(secs)
+            return time_stamp
 
     def sample_from(self):
+
+        fake = Faker()
         # randomly sample number of transactions
-        num_trans = int((self.end - self.start).days * \
-                np.random.uniform(self.profile['avg_transactions_per_day']['min'],\
+        num_trans = int((self.end - self.start).days *
+                np.random.uniform(self.profile['avg_transactions_per_day']['min'],
                                   self.profile['avg_transactions_per_day']['max']))
+
+        # randomly determine if customer is traveling based off of profile travel_pct param
+        if np.random.uniform() < self.profile['travel_pct']/100:
+            is_traveling = True
+        else:
+            is_traveling = False
+        travel_max = self.profile['travel_max_dist']
 
         output = []
         rand_date = np.random.random(num_trans)
         rand_cat = np.random.random(num_trans)
         for i, num in enumerate(rand_date):
+            trans_num = fake.md5(raw_output=False)
             chosen_date = self.closest_rand(self.profile['date_wt'], num)
             chosen_cat = self.closest_rand(self.profile['categories_wt'], rand_cat[i])
             chosen_amt = self.sample_amt(chosen_cat)
-            output.append('|'.join([str(i), str(chosen_date), str(chosen_cat), str(chosen_amt)]))
+            chosen_daypart = self.closest_rand(self.profile['shopping_time'], rand_cat[i])
+            stamp = self.sample_time(chosen_daypart)
+            output.append('|'.join([str(trans_num), str(chosen_date), str(stamp), str(chosen_cat), str(chosen_amt)]))
 
-        return output
+        return output, is_traveling, travel_max
 
