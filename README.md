@@ -1,15 +1,16 @@
-## Data generation scripts
+## Generate Fake Credit Card Transaction Data
+Based on original code by [Josh Plotkin](https://github.com/joshplotkin/data_generation)
 
-### TODO:
+The purpose of this code is to generate somewhat real credit card transaction data. The initial framework and (awesome) code around profiles, as well as initial assumptions for variable distributions was made by Josh. My list of modifications are below.
 
-* location of locations_partitions.csv is hardcoded
-* parallelize so it doesn't take so long
-* fix bug that generates data past user defined end date
-* come up with a realistic template so numbers aren't out of whack
-* allow user defined customer data, more categories, and generally more versatile
-* think about analysis that can be done --> add more columns
-* minor: add adds weeks to the start date so we don't get data for the final half week
-* script to calculate expected outputs based on profiles
-* improve shell scripts (alternatively, do the below...)
-* for transactions, give the option to provide either a folder of all profiles to iterate through or just one json (automatic checking)
-* user input to generate config files
+### Modifications:
+
+* Transaction times are now included instead of just dates
+* Profile specific spending windows (AM/PM with weighting of transaction times)
+* Merchant names (specific to spending categories) are now included (along with code for generation)
+* Travel probability is added, with profile specific options
+* Travel max distances is added, per profile option
+* Merchant location is randomized based on home location and profile travel probabilities
+* Simulated transaction numbers via faker MD5 hash (replacing sequential 0..n numbering)
+* Includes credit card number via faker
+* improved cross-platform file path compatibility

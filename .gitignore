@@ -11,3 +11,6 @@
 data/customers.csv
 *.xml
 *.pyc
+*.pyc
+demographics.pyc
+*.pyc
