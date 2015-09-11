@@ -35,7 +35,7 @@
 					"home": 150,
 					"kids_pets": 110,
 					"personal_care": 90,
-					"travel": 55
+					"travel": 400
 					},
 	"categories_amt": {
 					"gas_transport": {"mean": 60, "stdev": 15},
