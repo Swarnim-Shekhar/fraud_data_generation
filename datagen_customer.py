@@ -30,7 +30,7 @@ class Headers:
         self.headers = headers[:-1]
 
     def print_headers(self):
-        print self.headers
+        print(self.headers)
 
 
 class Customer:
@@ -106,7 +106,7 @@ class Customer:
         return match[0]
 
     def print_customer(self):
-        print str(self.ssn) + '|' + \
+        print(str(self.ssn) + '|' + \
               str(self.cc) + '|' + \
               self.first + '|' + \
               self.last + '|' + \
@@ -116,23 +116,23 @@ class Customer:
               self.job + '|' + \
               str(self.dob) + '|' + \
               str(self.account) + '|' + \
-              self.profile
+              self.profile)
 
 
 def validate():
     def print_err(n):
         if n == 1:
-            print 'Error: invalid number of customers'
+            print("Error: invalid number of customers")
         elif n == 2:
-            print 'Error: invalid (non-integer) random seed'
+            print("Error: invalid (non-integer) random seed")
         else:
-            print 'Error: main.config could not be opened'
+            print("Error: main.config could not be opened")
 
         output = '\nENTER:\n (1) Number of customers\n '
         output += '(2) Random seed (int)\n '
         output += '(3) main_config.json'
 
-        print output
+        print(output)
         sys.exit(0)
 
     try:
