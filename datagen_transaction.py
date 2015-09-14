@@ -43,13 +43,13 @@ def get_user_input():
         sys.exit(0)
 
     try:
-        #customers = open(sys.argv[1], 'r').readlines()
-        customers = open('C:\Users\swarnim\PycharmProjects\data_generation\capstone_data\customers.csv', 'r').readlines()
+        customers = open(sys.argv[1], 'r').readlines()
+        #customers = open('C:\Users\swarnim\PycharmProjects\data_generation\capstone_data\customers.csv', 'r').readlines()
     except:
         error_msg(1)
     try:
-        #m = str(sys.argv[2])
-        m = 'C:\Users\swarnim\PycharmProjects\data_generation\profiles\male_30_40_bigger_cities_fruad.json'
+        m = str(sys.argv[2])
+        #m = 'C:\Users\swarnim\PycharmProjects\data_generation\profiles\male_30_40_bigger_cities_fruad.json'
         pro = open(m, 'r').read()
         #fix for windows file paths
         pro_name = m.split('profiles')[-1]
