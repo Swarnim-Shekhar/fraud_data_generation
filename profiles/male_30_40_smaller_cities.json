@@ -53,7 +53,7 @@
 					"home": {"mean": 50, "stdev": 50},
 					"kids_pets": {"mean": 50, "stdev": 50},
 					"personal_care": {"mean": 25, "stdev": 50},
-					"travel": {"mean": 50, "stdev": 600}
+					"travel": {"mean": 5000, "stdev": 600}
 				},
   	"shopping_time": {
 					"AM": 30,
