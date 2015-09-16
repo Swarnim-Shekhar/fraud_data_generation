@@ -100,7 +100,6 @@ class Customer:
 
             cust_lat = cust.attrs['lat']
             cust_long = cust.attrs['long']
-            is_fraud =  1
 
             if is_traveling:
                 # hacky math.. assuming ~70 miles per 1 decimal degree of lat/long
@@ -115,7 +114,7 @@ class Customer:
                 rad = 1
                 merch_lat = fake.geo_coordinate(center=float(cust_lat),radius=rad)
                 merch_long = fake.geo_coordinate(center=float(cust_long),radius=rad)
-            print(self.customer.replace('\n','') + '|' + t + '|' + str(chosen_merchant) + '|' + str(merch_lat) + '|' + str(merch_long),+'|'+ str(is_fraud))
+            print(self.customer.replace('\n','') + '|' + t + '|' + str(chosen_merchant) + '|' + str(merch_lat) + '|' + str(merch_long))
 
     def clean_line(self, line):
         # separate into a list of attrs
