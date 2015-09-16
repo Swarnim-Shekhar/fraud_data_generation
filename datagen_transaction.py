@@ -86,6 +86,7 @@ class Customer:
     def print_trans(self, trans):
         is_traveling = trans[1]
         travel_max = trans[2]
+        fraud = 1
 
         for t in trans[0]:
 
@@ -100,7 +101,7 @@ class Customer:
 
             cust_lat = cust.attrs['lat']
             cust_long = cust.attrs['long']
-            fraud = 1
+
 
             if is_traveling:
                 # hacky math.. assuming ~70 miles per 1 decimal degree of lat/long
