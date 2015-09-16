@@ -73,7 +73,7 @@ def get_user_input():
 def create_header(line):
     headers = line.split('|')
     headers[-1] = headers[-1].replace('\n','')
-    headers.extend(['trans_num', 'trans_date', 'trans_time', 'category', 'amt', 'merchant', 'merch_lat', 'merch_long'])
+    headers.extend(['trans_num', 'trans_date', 'trans_time', 'category', 'amt', 'merchant', 'merch_lat', 'merch_long','is_fraud'])
     print(''.join([h + '|' for h in headers])[:-1])
     return headers
 

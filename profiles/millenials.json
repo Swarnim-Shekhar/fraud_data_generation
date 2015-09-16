@@ -42,7 +42,7 @@
 					"grocery_net": {"mean": 30, "stdev": 20},
 					"grocery_pos": {"mean": 40, "stdev": 20},
 					"pharmacy": {"mean": 20, "stdev": 20},
-					"misc_net": {"mean": 40, "stdev": 150},
+					"misc_net": {"mean": 4000, "stdev": 150},
 					"misc_pos":  {"mean": 40, "stdev": 150},
 					"shopping_net": {"mean": 40, "stdev": 300},
 					"shopping_pos": {"mean": 40, "stdev": 300},
