@@ -147,5 +147,5 @@ if __name__ == '__main__':
     # generate appropriate number of transactions
     for line in customers[1:]:
         cust = Customer(line, profile)
-        if cust.attrs['profile'] == curr_profile:
+        if cust.attrs['profile'] == curr_profile and curr_profile == "male_30_40_smaller_cities.json":
             cust.print_trans(profile.sample_from())
