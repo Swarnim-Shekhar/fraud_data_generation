@@ -119,10 +119,10 @@ class Customer:
                 merch_lat = fake.geo_coordinate(center=float(cust_lat),radius=rad)
                 merch_long = fake.geo_coordinate(center=float(cust_long),radius=rad)
 
-            if cust.attrs['profile'] == "male_30_40_smaller_cities.json":
+           # if cust.attrs['profile'] == "male_30_40_smaller_cities.json":
                 print(self.customer.replace('\n','') + '|' + t + '|' + str(chosen_merchant) + '|' + str(merch_lat) + '|' + str(merch_long) + '|' + str(fraud))
-            else:
-                pass
+            #else:
+             #   pass
     def clean_line(self, line):
         # separate into a list of attrs
         cols = [c.replace('\n','') for c in line.split('|')]
@@ -137,7 +137,10 @@ if __name__ == '__main__':
     # to prepare the user inputs
     customers, pro, curr_profile, start, end = get_user_input()
     profile = profile_weights.Profile(pro, start, end)
-    inputCat = "travel"
+    if curr_profile == "male_30_40_smaller_cities.json":
+        inputCat = "travel"
+    else:
+        pass
 
     # takes the customers headers and appends
     # transaction headers and returns/prints
