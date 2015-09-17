@@ -139,6 +139,8 @@ if __name__ == '__main__':
     profile = profile_weights.Profile(pro, start, end)
     if curr_profile == "male_30_40_smaller_cities.json":
         inputCat = "travel"
+    elif curr_profile == "female_30_40_smaller_cities.json":
+        inputCat = "pharmacy"
     else:
         pass
 

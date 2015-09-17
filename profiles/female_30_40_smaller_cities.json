@@ -41,7 +41,7 @@
 					"gas_transport": {"mean": 60, "stdev": 15},
 					"grocery_net": {"mean": 40, "stdev": 20},
 					"grocery_pos": {"mean": 50, "stdev": 20},
-					"pharmacy": {"mean": 30, "stdev": 20},
+					"pharmacy": {"mean": 3000, "stdev": 20},
 					"misc_net": {"mean": 50, "stdev": 150},
 					"misc_pos":  {"mean": 50, "stdev": 150},
 					"shopping_net": {"mean": 50, "stdev": 300},
