@@ -86,9 +86,7 @@ class Customer:
     def print_trans(self, trans):
         is_traveling = trans[1]
         travel_max = trans[2]
-        a = trans[0]
-        b = a.split('|')
-        fraud = b[3]
+        fraud = trans[0]
 
 
 
