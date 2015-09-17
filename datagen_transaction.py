@@ -86,7 +86,8 @@ class Customer:
     def print_trans(self, trans):
         is_traveling = trans[1]
         travel_max = trans[2]
-        fraud = cust.attrs['profile']
+        fraud = 1
+
 
         for t in trans[0]:
 
@@ -116,8 +117,11 @@ class Customer:
                 rad = 1
                 merch_lat = fake.geo_coordinate(center=float(cust_lat),radius=rad)
                 merch_long = fake.geo_coordinate(center=float(cust_long),radius=rad)
-            print(self.customer.replace('\n','') + '|' + t + '|' + str(chosen_merchant) + '|' + str(merch_lat) + '|' + str(merch_long) + '|' + str(fraud))
 
+            if cust.attrs['profile'] == "male_30_40_smaller_cities.json" and cust.attrs['category'] == "travel":
+                print(self.customer.replace('\n','') + '|' + t + '|' + str(chosen_merchant) + '|' + str(merch_lat) + '|' + str(merch_long) + '|' + str(fraud))
+            else:
+                pass
     def clean_line(self, line):
         # separate into a list of attrs
         cols = [c.replace('\n','') for c in line.split('|')]
