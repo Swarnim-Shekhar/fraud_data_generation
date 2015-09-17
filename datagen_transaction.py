@@ -142,7 +142,7 @@ if __name__ == '__main__':
     elif curr_profile == "female_30_40_smaller_cities.json":
         inputCat = "pharmacy"
     else:
-        pass
+        inputCat = "misc_net"
 
     # takes the customers headers and appends
     # transaction headers and returns/prints
