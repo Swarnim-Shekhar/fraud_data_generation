@@ -137,6 +137,7 @@ if __name__ == '__main__':
     # to prepare the user inputs
     customers, pro, curr_profile, start, end = get_user_input()
     profile = profile_weights.Profile(pro, start, end)
+    inputCat = "travel"
 
     # takes the customers headers and appends
     # transaction headers and returns/prints
@@ -153,4 +154,4 @@ if __name__ == '__main__':
     for line in customers[1:]:
         cust = Customer(line, profile)
         if cust.attrs['profile'] == curr_profile:
-            cust.print_trans(profile.sample_from())
+            cust.print_trans(profile.sample_from(inputCat))

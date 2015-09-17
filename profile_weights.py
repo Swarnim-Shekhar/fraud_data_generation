@@ -189,7 +189,7 @@ class Profile:
             time_stamp = str(hour) + ":" + str(mins) + ":" + str(secs)
             return time_stamp
 
-    def sample_from(self):
+    def sample_from(self, inputCat):
 
         fake = Faker()
         # randomly sample number of transactions
@@ -214,7 +214,7 @@ class Profile:
             chosen_amt = self.sample_amt(chosen_cat)
             chosen_daypart = self.closest_rand(self.profile['shopping_time'], rand_cat[i])
             stamp = self.sample_time(chosen_daypart)
-            if str(chosen_cat) == "travel":
+            if str(chosen_cat) == inputCat:
                 output.append('|'.join([str(trans_num), str(chosen_date), str(stamp), str(chosen_cat), str(chosen_amt)]))
             else:
                 pass
