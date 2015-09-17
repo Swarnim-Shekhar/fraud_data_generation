@@ -86,7 +86,7 @@ class Customer:
     def print_trans(self, trans):
         is_traveling = trans[1]
         travel_max = trans[2]
-        fraud = 1
+        fraud = cust.attrs['profile']
 
         for t in trans[0]:
 
@@ -147,5 +147,5 @@ if __name__ == '__main__':
     # generate appropriate number of transactions
     for line in customers[1:]:
         cust = Customer(line, profile)
-        if cust.attrs['profile'] == curr_profile and curr_profile == "male_30_40_smaller_cities.json":
+        if cust.attrs['profile'] == curr_profile:
             cust.print_trans(profile.sample_from())
