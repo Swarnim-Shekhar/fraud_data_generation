@@ -214,7 +214,9 @@ class Profile:
             chosen_amt = self.sample_amt(chosen_cat)
             chosen_daypart = self.closest_rand(self.profile['shopping_time'], rand_cat[i])
             stamp = self.sample_time(chosen_daypart)
-            output.append('|'.join([str(trans_num), str(chosen_date), str(stamp), str(chosen_cat), str(chosen_amt)]))
-            pass
+            if str(chosen_cat) == "travel":
+                output.append('|'.join([str(trans_num), str(chosen_date), str(stamp), str(chosen_cat), str(chosen_amt)]))
+            else:
+                pass
         return output, is_traveling, travel_max
 
