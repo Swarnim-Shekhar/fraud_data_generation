@@ -30,4 +30,4 @@ print(header)
 
 for c in category_list:
     for _ in range(0, n):
-        print(c + "|" + 'f_' + fake.company())
+        print(c + "|" + 'fr_' + fake.company())
