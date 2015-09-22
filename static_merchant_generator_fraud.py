@@ -26,7 +26,7 @@ category_list = ["gas_transport",
                  "kids_pets",
                  "personal_care",
                  "travel"]
-print header
+print(header)
 
 for c in category_list:
     for _ in range(0, n):
